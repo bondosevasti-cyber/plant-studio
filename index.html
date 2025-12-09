@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ka">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ურბანული ჯუნგლები</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Firago:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js Import Map -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="canvas-container"></div>
+
+    <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="Plant Studio" class="logo-img">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">მთავარი</a></li>
+                <li><a href="#about">შესახებ</a></li>
+                <li><a href="#products">მცენარეები</a></li>
+                <li><a href="#contact">კონტაქტი</a></li>
+            </ul>
+        </nav>
+        <a href="#products" class="btn-small">ნახე კოლექცია</a>
+    </header>
+
+    <section class="hero">
+        <!-- ფონური ვიდეო -->
+        <video autoplay loop muted class="hero-video">
+            <!-- ყურადღება: შეცვალეთ 'hero-video.mp4' თქვენი ვიდეო ფაილის სახელით -->
+            <source src="hero-video.mp4" type="video/mp4">
+            თქვენი ბრაუზერი არ תומך ב-ვიდეო ტეგს.
+        </video>
+
+        <div class="hero-overlay">
+            <div class="hero-text reveal-item">
+                <h1>მცენარის <br> სტუდია</h1>
+                <p>ჯანსაღი და იშვიათი ოთახის მცენარეები</p>
+                <a href="#products" class="btn-primary">ნახე კოლექცია</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container about-container">
+            <div class="about-img-wrapper">
+                <img src="about-image.png" alt="მცენარის მოვლა">
+            </div>
+            <div class="about-text reveal-item">
+                <h2>ჩვენს შესახებ</h2>
+                <div class="divider"></div>
+                <p>ჯანსაღი და იშვიათი ოთახის მცენარე, ჩვენთან დიდი ყურადღება ექცევა თითოეულ დეტალს. ჩვენი მიზანია
+                    შეგიქმნათ მყუდრო და მწვანე გარემო სახლში.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+
+        <div class="wood-wrapper container reveal-item">
+
+            <h2 class="section-title">პოპულარული მცენარეები</h2>
+
+            <div class="product-grid">
+
+                <div class="card">
+                    <div class="card-img-box">
+                        <span class="price-tag">50₾</span>
+                        <img src="monstera.jpeg" alt="მონსტერა">
+                    </div>
+                    <div class="card-details">
+                        <h3>მონსტერა - 50₾</h3>
+                        <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img-box">
+                        <span class="price-tag">20₾</span>
+                        <img src="cactus.jpeg" alt="კაქტუსი">
+                    </div>
+                    <div class="card-details">
+                        <h3>კაქტუსი - 20₾</h3>
+                        <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img-box">
+                        <span class="price-tag">45₾</span>
+                        <img src="ficus.jpeg" alt="ფიკუსი">
+                    </div>
+                    <div class="card-details">
+                        <h3>ფიკუსი - 45₾</h3>
+                        <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <h3>კონტაქტი</h3>
+        <p>+995 598 17 31 30</p>
+        <p>akhalaiamate303@gmail.com</p>
+        <p>სენაკი </p>
+
+        <div class="social-icons">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-pinterest"></i>
+        </div>
+        <div class="copyright">© 2025 plant studio. ყველა უფლება დაცულია.</div>
+    </footer>
+
+    <script>
+        // --- Scroll Animate (Wave Effect) ---
+        const observerOptions = {
+            threshold: 0.15, // ელემენტის 15% რომ გამოჩნდება, მაშინ ამუშავდეს
+            rootMargin: "0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // ტექსტების და სექციების ანიმაცია
+        document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
+
+        // ბარათების ტალღოვანი ანიმაცია (staggered effect)
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            // ყოველი მომდევნო ბარათი ცოტა გვიან გამოჩნდეს
+            card.style.transitionDelay = `${index * 0.2}s`;
+            observer.observe(card);
+        });
+
+        // --- ღილაკების ფუნქციონალი ---
+
+        // "კალათაში დამატება" ღილაკები
+        const cartBtns = document.querySelectorAll('.cart-btn');
+        cartBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                // ვიზუალური ეფექტი
+                this.style.backgroundColor = '#153e35'; // მუქი მწვანე
+                this.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+                alert('პროდუქტი წარმატებით დაემატა კალათაში!');
+
+                // 2 წამში დაბრუნება
+                setTimeout(() => {
+                    this.style.backgroundColor = 'var(--accent-orange)';
+                    this.innerHTML = '<i class="fa-solid fa-cart-shopping"></i>';
+                }, 2000);
+            });
+        });
+
+        // --- Custom Smooth Scroll ---
+        // ეს კოდი ანაცვლებს CSS-ის scroll-snap-ს, რათა სქროლი უფრო რბილი იყოს.
+        const sections = document.querySelectorAll('section, footer');
+        let currentSectionIndex = 0;
+        let isScrolling = false; // სქროლის 중복-ის თავიდან ასაცილებლად
+
+        // ფუნქცია, რომელიც არკვევს, რომელი სექციაა ამჟამად ეკრანზე
+        function updateCurrentSection() {
+            let index = 0;
+            for (const section of sections) {
+                const rect = section.getBoundingClientRect();
+                // თუ სექციის ზედა ნაწილი ეკრანის ნახევარზე მაღლაა, ესე იგი ესაა მიმდინარე სექცია
+                if (rect.top < window.innerHeight / 2) {
+                    currentSectionIndex = index;
+                }
+                index++;
+            }
+        }
+
+        // სქროლის 이벤트-ის მსმენელი
+        document.addEventListener('wheel', function (e) {
+            e.preventDefault(); // ბრაუזერის 기본 სქროლის გათიშვა
+
+            if (isScrolling) return; // თუ ანიმაცია მიმდინარეობს, ახალი სქროლი არ დაიწყოს
+
+            isScrolling = true;
+
+            let targetIndex = currentSectionIndex;
+            if (e.deltaY > 0) { // 아래로 სქროლვა
+                if (targetIndex < sections.length - 1) {
+                    targetIndex++;
+                }
+            } else { // 위로 სქროლვა
+                if (targetIndex > 0) {
+                    targetIndex--;
+                }
+            }
+
+            // სამიზნე სექციაზე რბილად გადასვლა
+            sections[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // 1 წამის შემდეგ isScrolling-ის განულება, რათა ახალი სქროლი 가능 გახდეს
+            setTimeout(() => {
+                isScrolling = false;
+                updateCurrentSection(); // მიმდინარე სექციის ინდექსის განახლება
+            }, 1000); // 1000ms (1 წამი) - ეს დრო შეგიძლიათ შეცვალოთ სურვილისამებრ
+
+        }, { passive: false });
+
+        // გვერდის ჩატვირთვისას მიმდინარე სექციის დადგენა
+        updateCurrentSection();
+    </script>
+
+    <!-- 3D Models Script -->
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+
+        // Perspective Camera
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+        scene.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+        dirLight.position.set(5, 5, 5);
+        scene.add(dirLight);
+
+        // Load Models
+        const loader = new GLTFLoader();
+        const leaves = [];
+        const modelPaths = ['holly_leaf.glb', 'red_ivy_leaf.glb'];
+
+        // Helper to load model
+        function loadModel(path) {
+            return new Promise((resolve, reject) => {
+                loader.load(path, (gltf) => {
+                    resolve(gltf.scene);
+                }, undefined, reject);
+            });
+        }
+
+        async function initLeaves() {
+            try {
+                // Load both models first
+                const loadedModels = await Promise.all(modelPaths.map(p => loadModel(p)));
+
+                // Create 8 instances
+                for (let i = 0; i < 8; i++) {
+                    const modelIndex = Math.floor(Math.random() * loadedModels.length);
+                    const baseModel = loadedModels[modelIndex];
+                    const leaf = baseModel.clone();
+
+                    // Calculate visible area in 3D units to position leaves correctly
+                    const vFOV = camera.fov * Math.PI / 180;
+                    const height = 2 * Math.tan(vFOV / 2) * camera.position.z;
+                    const width = height * camera.aspect;
+
+                    // Initial Position
+                    // ფოთლები გამოჩნდება ეკრანის სხვადასხვა წერტილში
+                    leaf.position.x = (Math.random() - 0.5) * width;
+                    leaf.position.y = (Math.random() - 0.5) * height;
+                    leaf.position.z = (Math.random() - 0.5) * 4; // ზოგი წინ, ზოგი უკან
+
+                    // Random Scale (Increased approx 2x)
+                    let scale = (Math.random() * 0.5) + 0.4; // 0.4-დან 1.2-მდე
+
+                    // If it is red_ivy_leaf (index 1), reduce size to match holly_leaf (approx / 5)
+                    if (modelIndex === 1) {
+                        scale = scale / 33
+                    }
+
+                    leaf.scale.set(scale, scale, scale);
+
+                    // Random Rotation
+                    leaf.rotation.x = Math.random() * Math.PI * 2;
+                    leaf.rotation.y = Math.random() * Math.PI * 2;
+                    leaf.rotation.z = Math.random() * Math.PI * 2;
+
+                    // Determine if this leaf will have a "spinning" effect
+                    // Disable spinning for red_ivy_leaf (modelIndex === 1)
+                    const isSpinner = modelIndex !== 1 && Math.random() < 0.3;
+
+                    // Custom animation data
+                    leaf.userData = {
+                        rotSpeedX: (Math.random() - 0.5) * (isSpinner ? 0.1 : 0.02),
+                        rotSpeedY: (Math.random() - 0.5) * (isSpinner ? 0.1 : 0.02),
+                        rotSpeedZ: (Math.random() - 0.5) * (isSpinner ? 0.1 : 0.01),
+
+                        // Swaying parameters for non-spinners
+                        isSpinner: isSpinner,
+                        initialRotX: leaf.rotation.x,
+                        initialRotY: leaf.rotation.y,
+                        initialRotZ: leaf.rotation.z,
+                        swaySpeed: (Math.random() * 1) + 0.5,
+                        swayAmp: (Math.random() * 0.2) + 0.1,
+
+                        // ქარის სიჩქარე დამოკიდებულია სიღრმეზე (შორი ფოთლები ნელა მოძრაობენ)
+                        windSpeed: ((Math.random() * 0.01) + 0.005) * (1 + (leaf.position.z / 5)), // Base wind
+                        driftSpeed: (Math.random() * 0.5) + 0.2, // Sinusoidal drift frequency
+
+                        fallSpeed: ((Math.random() * 0.005) + 0.002) * (1 + (leaf.position.z / 5)),
+                        timeOffset: Math.random() * 100,
+                        // ეკრანის საზღვრები 3D სივრცეში
+                        bounds: {
+                            x: width / 2 + 2, // დამატებითი ზღვარი
+                            y: height / 2 + 2,
+                        }
+                    };
+
+                    scene.add(leaf);
+                    leaves.push(leaf);
+                }
+
+            } catch (error) {
+                console.error("Error loading 3D models:", error);
+            }
+        }
+
+        initLeaves();
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const time = Date.now() * 0.0005; // ანიმაციის სიჩქარის შესანელებლად
+
+            // Sync Camera with Scroll
+            const vFOV = camera.fov * Math.PI / 180;
+            const visibleHeight = 2 * Math.tan(vFOV / 2) * 5;
+            const pixelToThree = visibleHeight / window.innerHeight;
+            camera.position.y = -window.scrollY * pixelToThree;
+
+            leaves.forEach(leaf => {
+                if (leaf.userData.isSpinner) {
+                    // Spinning behavior for spinners
+                    leaf.rotation.x += leaf.userData.rotSpeedX;
+                    leaf.rotation.y += leaf.userData.rotSpeedY;
+                    leaf.rotation.z += leaf.userData.rotSpeedZ;
+                } else {
+                    // Gentle swaying for non-spinners (like leaves floating)
+                    // We oscillate around the initial rotation
+                    const sway = Math.sin(time * leaf.userData.swaySpeed + leaf.userData.timeOffset) * leaf.userData.swayAmp;
+                    leaf.rotation.z = leaf.userData.initialRotZ + sway;
+                    leaf.rotation.x = leaf.userData.initialRotX + sway * 0.5;
+                }
+
+                // Wind (Horizontal movement with Drift)
+                // Base speed + sine wave drift
+                const drift = Math.sin(time * leaf.userData.driftSpeed + leaf.userData.timeOffset) * 0.002;
+                leaf.position.x += leaf.userData.windSpeed + drift;
+
+                // Falling and Bobbing (Vertical movement)
+                leaf.position.y -= leaf.userData.fallSpeed;
+                // Add a little horizontal flutter based on vertical movement
+                leaf.position.x += Math.cos(time * 2 + leaf.userData.timeOffset) * 0.001;
+
+                leaf.position.y += Math.sin(time + leaf.userData.timeOffset) * 0.005;
+
+                // Wrapping (ეკრანის საზღვრებიდან გასვლისას დაბრუნება)
+                const bounds = leaf.userData.bounds;
+                const camRelativeY = leaf.position.y - camera.position.y;
+
+                // თუ ეკრანის მარჯვენა საზღვარს გასცდა, მარცხნიდან გამოვა
+                if (leaf.position.x > bounds.x) {
+                    leaf.position.x = -bounds.x;
+                }
+                // თუ ეკრანის ქვედა საზღვარს გასცდა, ზემოდან გამოვა
+                if (camRelativeY < -bounds.y) {
+                    // დავაბრუნოთ ეკრანის თავში, კამერის ამჟამინდელი პოზიციის გათვალისწინებით
+                    leaf.position.y = camera.position.y + bounds.y;
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+
+
+        animate();
+
+        // Resize Handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+    <script src="navbar-scroll.js"></script>
+</body>
+
+</html>
