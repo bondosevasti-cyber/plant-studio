@@ -26,12 +26,15 @@
         <div class="logo">
             <img src="logo.png" alt="Plant Studio" class="logo-img">
         </div>
+        <div class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
         <nav>
             <ul class="nav-links">
-                <li><a href="index.html">მთავარი</a></li>
-                <li><a href="#about">შესახებ</a></li>
-                <li><a href="#products">მცენარეები</a></li>
-                <li><a href="#contact">კონტაქტი</a></li>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> მთავარი</a></li>
+                <li><a href="#about"><i class="fa-solid fa-leaf"></i> შესახებ</a></li>
+                <li><a href="#products"><i class="fa-solid fa-seedling"></i> მცენარეები</a></li>
+                <li><a href="#contact"><i class="fa-solid fa-phone"></i> კონტაქტი</a></li>
             </ul>
         </nav>
         <a href="#products" class="btn-small">ნახე კოლექცია</a>
@@ -224,6 +227,37 @@
 
         // გვერდის ჩატვირთვისას მიმდინარე სექციის დადგენა
         updateCurrentSection();
+
+        // --- Hamburger Menu Toggle ---
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navLinksItems = document.querySelectorAll('.nav-links li a');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+
+                // Toggle icon between bars and times (close)
+                const icon = hamburger.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
+
+        // Close menu when a link is clicked
+        navLinksItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = hamburger.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
     </script>
 
     <!-- 3D Models Script -->
@@ -291,7 +325,7 @@
 
                     // If it is red_ivy_leaf (index 1), reduce size to match holly_leaf (approx / 5)
                     if (modelIndex === 1) {
-                        scale = scale / 33
+                        scale = scale / 33;
                     }
 
                     leaf.scale.set(scale, scale, scale);
