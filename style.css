@@ -73,6 +73,13 @@ a {
     align-items: center;
 }
 
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: white;
+}
+
 .logo-img {
     height: 50px;
     width: auto;
@@ -91,6 +98,10 @@ a {
     font-weight: 500;
     font-size: 0.9rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links i {
+    display: none;
 }
 
 .btn-small {
@@ -371,11 +382,76 @@ a {
 @media (max-width: 768px) {
     .header {
         padding: 20px;
-        flex-direction: column;
-        gap: 15px;
+        /* Keep header always on top */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        /* Ensure z-index is high enough */
+        z-index: 1000;
+        /* Flex adjustments for mobile header */
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hamburger {
+        display: block;
     }
 
     .nav-links {
+        display: block;
+        /* Default block, logic handled by height */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 61, 46, 0.95);
+        /* Semi-transparent dark green */
+        backdrop-filter: blur(10px);
+
+        /* Dropdown transition */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        box-shadow: none;
+        gap: 0;
+    }
+
+    .nav-links.active {
+        max-height: 500px;
+        /* Arbitrary large height */
+        padding: 20px 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .nav-links i {
+        display: inline-block;
+        /* Reset icon display */
+        margin-right: 10px;
+        margin-bottom: 0;
+        font-size: 1rem;
+    }
+
+    .nav-links a {
+        display: inline-block;
+        /* Reset link display */
+        font-size: 1.1rem;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .header .btn-small {
         display: none;
     }
 
